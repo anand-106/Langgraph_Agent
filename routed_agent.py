@@ -5,13 +5,16 @@ from langgraph.graph.message import add_messages
 from langchain.chat_models import init_chat_model
 from pydantic import BaseModel, Field
 from typing_extensions import TypedDict
+from langchain_ollama import ChatOllama
 import getpass
 import os
 
 #API KEY CONNECTION
 if not os.environ.get("GOOGLE_API_KEY"):
   os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter API key for Google Gemini: ")
-llm = init_chat_model("gemini-1.5-flash-8b", model_provider="google_genai")
+# llm = init_chat_model("gemini-1.5-flash-8b", model_provider="google_genai")
+
+llm = ChatOllama(model="gemma3:1b")
 
 
 class MessageClassifier(BaseModel):
